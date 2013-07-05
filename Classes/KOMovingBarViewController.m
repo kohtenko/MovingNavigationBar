@@ -58,7 +58,8 @@
                                                                        self.navigationController.navigationBar.frame.size.height);
         }
     }else
-        if(self.navigationController.navigationBar.frame.origin.y < [UIApplication sharedApplication].statusBarFrame.size.height){//not yet shown
+        if(self.navigationController.navigationBar.frame.origin.y < [UIApplication sharedApplication].statusBarFrame.size.height  &&
+           (self.scrollForHideNavigation.contentSize.height > self.scrollForHideNavigation.contentOffset.y + self.scrollForHideNavigation.frame.size.height)){//not yet shown
             float newY = self.navigationController.navigationBar.frame.origin.y + (lastOffsetY - scrollView.contentOffset.y);
             if(newY > [UIApplication sharedApplication].statusBarFrame.size.height)
                 newY = [UIApplication sharedApplication].statusBarFrame.size.height;
