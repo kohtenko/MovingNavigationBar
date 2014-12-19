@@ -10,7 +10,7 @@
 
 
 @interface KOMovingBarViewController ()
-
+@property (nonatomic) UIEdgeInsets originalInsets;
 @end
 
 @implementation KOMovingBarViewController
@@ -18,9 +18,15 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     if(self.scrollForHideNavigation){
-        float topInset = self.navigationController.navigationBar.frame.size.height;
-        
-        self.scrollForHideNavigation.contentInset = UIEdgeInsetsMake(topInset, 0, 0, 0);
+        if (self.navigationController.navigationBar.isOpaque){
+            float topInset = self.navigationController.navigationBar.frame.size.height;
+            
+            self.scrollForHideNavigation.contentInset = UIEdgeInsetsMake(topInset + self.scrollForHideNavigation.contentInset.top,
+                                                                         self.scrollForHideNavigation.contentInset.left,
+                                                                         self.scrollForHideNavigation.contentInset.bottom,
+                                                                         self.scrollForHideNavigation.contentInset.right);
+        }
+        self.originalInsets = self.scrollForHideNavigation.contentInset;
     }
 }
 
@@ -40,11 +46,12 @@
         return;
     if(scrollView.frame.size.height >= scrollView.contentSize.height)
         return;
-    
-    if(scrollView.contentOffset.y > -self.navigationController.navigationBar.frame.size.height && scrollView.contentOffset.y < 0)
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    else if(scrollView.contentOffset.y >= 0)
-        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    if(scrollView.contentOffset.y >= -self.navigationController.navigationBar.frame.size.height && scrollView.contentOffset.y <= 0)
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y + [UIApplication sharedApplication].statusBarFrame.size.height,
+                                                   self.originalInsets.left,
+                                                   self.originalInsets.bottom, self.originalInsets.right);
+    else if(scrollView.contentOffset.y >= scrollView.contentInset.top)
+        scrollView.contentInset = UIEdgeInsetsZero;
     
     if(lastOffsetY < scrollView.contentOffset.y && scrollView.contentOffset.y >= -self.navigationController.navigationBar.frame.size.height){//moving up
         

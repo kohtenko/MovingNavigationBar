@@ -272,6 +272,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KOMovingNavigationBarExample/KOMovingNavigationBarExample-Prefix.pch";
 				INFOPLIST_FILE = "KOMovingNavigationBarExample/KOMovingNavigationBarExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -283,6 +284,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KOMovingNavigationBarExample/KOMovingNavigationBarExample-Prefix.pch";
 				INFOPLIST_FILE = "KOMovingNavigationBarExample/KOMovingNavigationBarExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -307,6 +309,7 @@
 				139F88C71767307D00EBDD87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
